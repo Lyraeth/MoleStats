@@ -16,13 +16,28 @@ function handleNotFound(req, res, next) {
   res.send("Oops! nothing here");
 }
 
+// Middleware
+const userLogin = function (req, res, next) {
+  console.log("You has succesfully login");
+  next();
+};
+
+const requestTime = function (req, res, next) {
+  req.requestTime = Date.now();
+  next();
+};
+
+app.use(userLogin);
+
+app.use(requestTime);
+
 app.get("/", async (req, res) => {
-  res.send("Hello there!");
+  let responseText = "Hello World!<br>";
+  responseText += `<small>Requested at: ${req.requestTime}</small>`;
+  res.send(responseText);
 });
 
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`Server is already running at ${PORT}`);
-});
+app.listen(3000);
 
 //userRoutes
 app.use("/users", userRoutes);
