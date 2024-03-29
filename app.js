@@ -17,22 +17,22 @@ function handleNotFound(req, res, next) {
 }
 
 // Middleware
-const userLogin = function (req, res, next) {
-  console.log("You has succesfully login");
-  next();
-};
+// const userLogin = function (req, res, next) {
+//   console.log("You has succesfully login");
+//   next();
+// };
 
 const requestTime = function (req, res, next) {
   req.requestTime = Date.now();
   next();
 };
 
-app.use(userLogin);
+// app.use(userLogin);
 
 app.use(requestTime);
 
 app.get("/", async (req, res) => {
-  let responseText = "Hello World!<br>";
+  res.send("Hello There");
   responseText += `<small>Requested at: ${req.requestTime}</small>`;
   res.send(responseText);
 });
