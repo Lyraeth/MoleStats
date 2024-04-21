@@ -2,7 +2,6 @@ const express = require("express");
 const userRoutes = express.Router();
 const { prisma } = require("../config/prisma");
 const bcrypt = require("bcrypt");
-const { parse } = require("dotenv");
 
 // get all users
 userRoutes.get("/", async (req, res) => {
@@ -27,11 +26,6 @@ userRoutes.get("/:id", async (req, res) => {
 // create users
 userRoutes.post("/", async (req, res) => {
   const { user_username, user_email, user_name, user_password } = req.body;
-
-  if (!user_username || !user_email)
-    res.status(404).json({
-      message: "Username dan Email wajib diisi",
-    });
 
   const salt = await bcrypt.genSalt(10);
 

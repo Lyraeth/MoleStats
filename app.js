@@ -11,6 +11,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 const { userRoutes } = require("./routes/userRoutes");
+const { accountRoutes } = require("./routes/accountRoutes");
 
 function handleNotFound(req, res, next) {
   res.send("Oops! nothing here");
@@ -26,6 +27,9 @@ app.listen(PORT, "0.0.0.0", () => {
 
 //userRoutes
 app.use("/users", userRoutes);
+
+//accountRoutes
+app.use("/account", accountRoutes);
 
 // handleNotFound
 app.use(handleNotFound);
